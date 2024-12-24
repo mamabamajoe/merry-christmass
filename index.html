@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merry Christmas Poster</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ff3333;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .poster-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            pointer-events: none; /* Allows interaction through the border */
+        }
+
+        .sticker {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+        }
+
+        .tree {
+            width: 80px;
+            height: 100px;
+            background: linear-gradient(to bottom, #008000, #004d00);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .santa {
+            width: 80px;
+            height: 100px;
+            background-color: #ff0000;
+            border-radius: 50% 50% 0 0;
+            position: relative;
+        }
+
+        .santa::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .snowman {
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .snowman::before, .snowman::after {
+            content: '';
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        .snowman::before {
+            width: 80px;
+            height: 80px;
+            top: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .snowman::after {
+            width: 40px;
+            height: 40px;
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .vehicle {
+            width: 120px;
+            height: 60px;
+            background-color: #ff0000;
+            position: relative;
+        }
+
+        .vehicle::before, .vehicle::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            width: 30px;
+            height: 30px;
+            background-color: #000;
+            border-radius: 50%;
+        }
+
+        .vehicle::before {
+            left: 10px;
+        }
+
+        .vehicle::after {
+            right: 10px;
+        }
+
+        .santa-hi {
+            width: 80px;
+            height: 100px;
+            background-color: #ff0000;
+            border-radius: 50% 50% 0 0;
+            position: relative;
+        }
+
+        .santa-hi::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            z-index: 2;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .wisher {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #008000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .audio-container {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            z-index: 3;
+        }
+
+        .audio-container button {
+            background-color: #fff;
+            color: #ff3333;
+            font-size: 1em;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="poster-border">
+    <div class="tree sticker"></div>
+    <div class="santa sticker"></div>
+    <div class="snowman sticker"></div>
+    <div class="vehicle sticker"></div>
+    <div class="santa-hi sticker"></div>
+    <div class="santa-hi sticker"></div>
+</div>
+
+<div class="container">
+    <h1>Merry Christmas!</h1>
+    <div class="wisher">By: Your Name Here</div>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <button class="button" onclick="updateMessage()">Update</button>
+</div>
+
+<div class="audio-container">
+    <button onclick="toggleMusic()">Play Jingle Bells</button>
+    <audio id="jingleAudio" class="hidden" loop>
+        <source src="jingle_bells.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<script>
+    function updateMessage() {
+        const name = document.getElementById("nameInput").value.trim();
+        const wisher = document.querySelector(".wisher");
+        wisher.textContent = `By: ${name || "Your Name Here"}`;
+    }
+
+    function toggleMusic() {
+        const audio = document.getElementById("jingleAudio");
+        const button = document.querySelector(".audio-container button");
+
+        if (audio.paused) {
+            audio.play();
+            button.textContent = "Pause Jingle Bells";
+        } else {
+            audio.pause();
+            button.textContent = "Play Jingle Bells";
+        }
+    }
+</script>
+
+</body>
+</html>
+
